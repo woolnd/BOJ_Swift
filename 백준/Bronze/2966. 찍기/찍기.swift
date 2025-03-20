@@ -1,47 +1,52 @@
+//
+//  main.swift
+//  BOJ
+//
+//  Created by wodnd on 9/16/24.
+//
 import Foundation
 
+let input = Int(readLine() ?? "0") ?? 0
+let inputAnswer = readLine() ?? ""
+let arrayAnswer = Array(inputAnswer)
+
 let AdrianAnswer = ["A", "B", "C"]
-let AdrianArray = (0..<100).map { AdrianAnswer[$0 % AdrianAnswer.count] }
-
 let BrunoAnswer = ["B", "A", "B", "C"]
-let BrunoArray = (0..<100).map { BrunoAnswer[$0 % BrunoAnswer.count] }
-
 let GoranAnswer = ["C", "C", "A", "A", "B", "B"]
-let GoranArray = (0..<100).map { GoranAnswer[$0 % GoranAnswer.count] }
 
-var Count = [0, 0, 0]
 
-if let count = readLine() {
-    let answer = readLine()!
+var AdrianCount = 0
+var BrunoCount = 0
+var GoranCount = 0
+
+for i in 0..<arrayAnswer.count {
     
-    if Int(count) == answer.count {
-        let characters = Array(answer)
-        
-        for index in 0..<characters.count {
-            if String(characters[index]) == AdrianArray[index] {
-                Count[0] += 1
-            }
-            
-            if String(characters[index]) == BrunoArray[index] {
-                Count[1] += 1
-            }
-            
-            if String(characters[index]) == GoranArray[index] {
-                Count[2] += 1
-            }
-        }
-        
-        let maxScore = Count.max()!
-        print(maxScore)
-        
-        if Count[0] == maxScore {
-            print("Adrian")
-        }
-        if Count[1] == maxScore {
-            print("Bruno")
-        }
-        if Count[2] == maxScore {
-            print("Goran")
-        }
+    let chkAdrian = i % 3
+    let chkBruno = i % 4
+    let chkGoran = i % 6
+    
+    if String(AdrianAnswer[chkAdrian]) == String(arrayAnswer[i]) {
+        AdrianCount += 1
+    }
+    
+    if String(BrunoAnswer[chkBruno]) == String(arrayAnswer[i]) {
+        BrunoCount += 1
+    }
+    
+    if String(GoranAnswer[chkGoran]) == String(arrayAnswer[i]) {
+        GoranCount += 1
+    }
+}
+
+var result: [Int] = []
+var name: [String] = ["Adrian", "Bruno", "Goran"]
+result.append(AdrianCount)
+result.append(BrunoCount)
+result.append(GoranCount)
+
+print(result.max() ?? 0)
+for i in 0..<3{
+    if result.max() == result[i]{
+        print(name[i])
     }
 }
