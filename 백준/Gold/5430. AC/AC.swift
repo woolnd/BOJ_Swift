@@ -6,49 +6,37 @@
 //
 import Foundation
 
-if let input = readLine() {
-    let testCases = Int(input) ?? 0
+let inputCase = Int(readLine() ?? "") ?? 0
+
+for _ in 0..<inputCase {
+    let inputCmd = Array(readLine().map{ String($0) } ?? "")
+    let inputCount = Int(readLine() ?? "") ?? 0
+    var array = Array(readLine()!.dropFirst().dropLast().split(separator: ","))
     
-    for _ in 0..<testCases {
-        // 명령 입력
-        let commands = readLine()?.compactMap { String($0) } ?? []
-        
-        // 숫자 개수 입력
-        let count = Int(readLine() ?? "0") ?? 0
-        
-        // 배열 입력
-        var array = readLine()!.dropFirst().dropLast().split(separator: ",").map{String($0)}
-        
-        var head = 0
-        var check = false
-        var tail = array.count
-        
-        for command in commands {
-            switch command {
-            case "R":
-                check.toggle()
-            case "D":
-                if check {
-                    tail -= 1
-                }
-                else {
-                    head += 1
-                }
-            default:
-                break
-            }
-        }
-        
-        if head > tail {
-            print("error")
-        }
-        
-        else {
-            if check {
-                print("[\(array[head..<tail].reversed().joined(separator: ","))]")
+    var head = 0
+    var tail = array.count
+    var toggle = false
+    
+    for cmd in inputCmd {
+        if cmd == "R"{
+            toggle.toggle()
+        } else if cmd == "D"{
+            if !toggle {
+                head += 1
             } else {
-                print("[\(array[head..<tail].joined(separator: ","))]")
+                tail -= 1
             }
         }
     }
+    
+    if head > tail {
+        print("error")
+    } else {
+        if toggle {
+            print("[\(array[head..<tail].reversed().joined(separator: ","))]")
+        } else {
+            print("[\(array[head..<tail].joined(separator: ","))]")
+        }
+    }
+    
 }
