@@ -6,26 +6,22 @@
 //
 import Foundation
 
-let caseCount = Int(readLine() ?? "0") ?? 0
-
+let inputCase = Int(readLine() ?? "0") ?? 0
 var array: [(Int, Int)] = []
 
-for _ in 0..<caseCount {
-    if let input = readLine()?.split(separator: " "){
-        let inputX = Int(input[0]) ?? 0
-        let inputY = Int(input[1]) ?? 0
-        
-        array.append((inputX, inputY))
+for _ in 0..<inputCase {
+    if let input = readLine()?.split(separator: " "), input.count == 2{
+        array.append((Int(input[0])!, Int(input[1])!))
+    }
+}
+array.sort { a, b in
+    if a.0 == b.0 {
+        return a.1 < b.1
+    } else {
+        return a.0 < b.0
     }
 }
 
-let result =  array.sorted{
-    if $0.0 == $1.0 {
-        return $0.1 < $1.1
-    }
-    return $0.0 < $1.0
-}
-
-for index in result{
-    print("\(index.0) \(index.1)")
+for (num1, num2) in array{
+    print("\(num1) \(num2)")
 }
