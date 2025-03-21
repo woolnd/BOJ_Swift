@@ -1,32 +1,34 @@
-////
-////  main.swift
-////  BOJ
-////
-////  Created by wodnd on 9/16/24.
-////
+//
+//  main.swift
+//  BOJ
+//
+//  Created by wodnd on 9/16/24.
+//
 import Foundation
 
-if let input = readLine()?.split(separator: " "){
-    let inputM = Int(input[0]) ?? 0
-    let inputN = Int(input[1]) ?? 0
+if let input = readLine()?.split(separator: " "), input.count == 2{
+    var start = Int(input[0]) ?? 0
+    var end = Int(input[1]) ?? 0
     
-    var isPrimeNumber = [Bool](repeating: true, count: inputN + 1)
-    isPrimeNumber[0] = false
-    isPrimeNumber[1] = false
+    var isPrime: [Bool] = Array(repeating: true, count: end + 1)
+    isPrime[0] = false
+    isPrime[1] = false
     
-    for i in 1...Int(sqrt(Double(inputN))) {
-        if isPrimeNumber[i] {
+    for i in 1...Int(sqrt(Double(end))){
+        if isPrime[i] {
             var j = 2
-            while i * j <= inputN {
-                isPrimeNumber[i * j] = false
+            
+            while i * j <= end {
+                isPrime[i * j] = false
                 j += 1
             }
         }
     }
     
-    for i in inputM...inputN {
-        if isPrimeNumber[i] {
+    for i in start...end {
+        if isPrime[i]{
             print(i)
         }
     }
+    
 }
