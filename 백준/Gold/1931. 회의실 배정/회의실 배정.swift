@@ -6,30 +6,32 @@
 //
 import Foundation
 
-let inputTime = Int(readLine() ?? "0") ?? 0
+let inputCase = Int(readLine() ?? "") ?? 0
 
-var times: [[Int]] = []
+var times: [(Int, Int)] = []
 
-for _ in 0..<inputTime {
-    if let time = readLine()?.split(separator: " ").compactMap({ Int($0) }) {
-        times.append(time)
+for _ in 0..<inputCase {
+    if let input = readLine()?.split(separator: " "), input.count == 2{
+        times.append((Int(input[0]) ?? 0 , Int(input[1]) ?? 0))
     }
 }
 
-times.sort {
-    if $0[1] == $1[1] {
-        return $0[0] < $1[0]
+
+times.sort { a, b in
+    if a.1 == b.1 {
+        return a.0 < b.0
+    } else {
+        return a.1 < b.1
     }
-    return $0[1] < $1[1]
 }
 
+var lastTime = 0
 var count = 0
-var lastEndTime = 0
 
-for time in times {
-    if time[0] >= lastEndTime {
+for (start, last) in times {
+    if start >= lastTime{
         count += 1
-        lastEndTime = time[1]
+        lastTime = last
     }
 }
 
