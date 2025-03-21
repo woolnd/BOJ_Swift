@@ -6,19 +6,21 @@
 //
 import Foundation
 
-if let inputCase = readLine()?.split(separator: " "), inputCase.count == 2{
-    let N = Int(inputCase[0]) ?? 0
-    let C = Int(inputCase[1]) ?? 0
+if let input = readLine()?.split(separator: " "), input.count == 2{
+    let N = Int(input[0]) ?? 0
+    let C = Int(input[1]) ?? 0
     
     var houses: [Int] = []
-    for _ in 0..<N{
+    
+    for _ in 0..<N {
         houses.append(Int(readLine() ?? "0") ?? 0)
     }
     
-    houses.sort()
+    houses.sort(by: <)
     
     var start = 1
-    var end = houses[N-1] - houses[0]
+    var end = houses[N - 1]  - houses[0]
+    var result = 0
     
     while start <= end {
         let mid = (start + end) / 2
@@ -26,17 +28,19 @@ if let inputCase = readLine()?.split(separator: " "), inputCase.count == 2{
         var count = 1
         
         for house in houses {
-            if house >= current + mid{
-                current = house
+            if house >= current + mid {
                 count += 1
+                current = house
             }
         }
         
-        if count >= C{
+        if count >= C {
             start = mid + 1
+            result = mid
         } else {
             end = mid - 1
         }
     }
-    print(end)
+    
+    print(result)
 }
