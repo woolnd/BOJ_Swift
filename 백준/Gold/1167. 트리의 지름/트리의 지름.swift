@@ -32,7 +32,7 @@ let farthestNode = firstDistance.firstIndex(of: maxFirstDistance)!
 let secondDistance = bfs(farthestNode)
 let maxSecondDistance = secondDistance.max()!
 
-print(max(maxFirstDistance, maxSecondDistance))
+print(maxSecondDistance)
 
 
 func bfs(_ start: Int) -> [Int] {
