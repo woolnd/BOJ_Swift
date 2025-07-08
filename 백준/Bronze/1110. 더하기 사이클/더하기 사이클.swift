@@ -1,23 +1,24 @@
+//
+//  main.swift
+//  BOJ
+//
+//  Created by wodnd on 9/16/24.
+//
 import Foundation
 
-let input = Int(readLine()!)!
-var number = input
-var cycle: Int = 0
+var N: Int = Int(readLine()!)!
+var temp = N
+var count = 0
 
-repeat {
-    var sum = 0
-    if number < 10 {
-        sum = number
-        number = number * 10 + sum
-    } else {
-        sum = number / 10 + number % 10
-        if sum < 10 {
-            number = (number % 10 * 10) + sum
-        } else {
-            number = (number % 10 * 10) + (sum % 10)
-        }
-    }
-    cycle += 1
-} while input != number
+while true {
+    count += 1
+    
+    let a = temp / 10
+    let b = temp % 10
+    let sum = a + b
+    
+    temp = (b * 10) + (sum % 10)
+    if temp == N { break }
+}
 
-print(cycle)
+print(count)
