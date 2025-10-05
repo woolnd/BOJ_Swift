@@ -8,23 +8,15 @@ import Foundation
 
 let N = Int(readLine()!)!
 var list = readLine()!.split(separator: " ").map{ Int($0)! }
-let check = list.sorted()
 
-func tripleReverse(_ arr: inout [Int], center i: Int) {
-    arr.swapAt(i - 1, i + 1)
-}
+var Ok: Bool = true
 
-var changed = true
-
-while changed {
-    changed = false
-    for i in 1..<(N - 1) {
-        if list[i - 1] > list[i + 1] {
-            tripleReverse(&list, center: i)
-            changed = true
-        }
+for i in 1...N {
+    if (i % 2) != (list[i - 1] % 2) {
+        Ok = false
+        break
     }
 }
 
 
-print(list == check ? "YES" : "NO")
+print(Ok ? "YES" : "NO")
