@@ -1,10 +1,3 @@
-//
-//  main.swift
-//  BOJ
-//
-//  Created by wodnd on 9/16/24.
-//
-import Foundation
 
 let TC = Int(readLine()!)!
 
