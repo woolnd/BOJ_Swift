@@ -1,14 +1,9 @@
-# BOJ_Swift
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+# 🍎 Algorithm Solutions
+> 백준(BOJ) 및 LeetCode 문제 풀이 기록 저장소입니다.
+<div align="center">
 
-<!---LeetCode Topics Start-->
-# LeetCode Topics
-## Array
-|  |
-| ------- |
-| [0001-two-sum](https://github.com/woolnd/BOJ_Swift/tree/master/0001-two-sum) |
-## Hash Table
-|  |
-| ------- |
-| [0001-two-sum](https://github.com/woolnd/BOJ_Swift/tree/master/0001-two-sum) |
-<!---LeetCode Topics End-->
+| **Baekjoon (Solved.ac)** | **LeetCode (Stats)** |
+| :---: | :---: |
+| ![Solved.ac](https://mazassumnida.wtf/api/v2/generate_badge?boj=wo_olnd) | [![Leetcode Stats](https://leetcard.jacoblin.cool/Wodnd)](https://leetcode.com/Wodnd) |
+
+</div>
