@@ -78,13 +78,7 @@ jobs:
 
           # 2순위: stats.json에서 추출
           if [ -z "$LEVEL" ] && [ -f "$STATS_PATH" ]; then
-            LEVEL=$(cat "$STATS_PATH" | python3 -c "
-import sys, json
-data = json.load(sys.stdin)
-pkg = '$PACKAGE_NAME'
-difficulty = data.get('leetcode', {}).get('shas', {}).get(pkg, {}).get('difficulty', '')
-print(difficulty.capitalize() if difficulty else '')
-")
+            LEVEL=$(python3 -c "import json; data=json.load(open('$STATS_PATH')); d=data.get('leetcode',{}).get('shas',{}).get('$PACKAGE_NAME',{}).get('difficulty',''); print(d.capitalize() if d else '')")
             echo "stats.json에서 추출: $LEVEL"
           fi
 
@@ -106,16 +100,16 @@ print(difficulty.capitalize() if difficulty else '')
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Move Directory
         run: |
           PACKAGE_NAME="${{ needs.detect.outputs.package_name }}"
           LEVEL_DIRECTORY="${{ needs.detect.outputs.level }}"
           ROOT_DIR="LeetCode"
-      
+
           echo "옮겨야 할 패키지 확인: $PACKAGE_NAME"
           echo "감지된 레벨: $LEVEL_DIRECTORY"
-      
+
           FOUND_EXISTING_PATH=""
           for dir in "$ROOT_DIR"/*; do
             if [ -d "$dir/$PACKAGE_NAME" ]; then
@@ -124,7 +118,7 @@ print(difficulty.capitalize() if difficulty else '')
               break
             fi
           done
-      
+
           if [ -n "$FOUND_EXISTING_PATH" ]; then
             DEST="$FOUND_EXISTING_PATH/$PACKAGE_NAME"
             echo "→ 기존 디렉토리로 병합 이동: $DEST"
@@ -141,7 +135,7 @@ print(difficulty.capitalize() if difficulty else '')
         run: |
           COMMIT_MSG="${{ needs.detect.outputs.commit_msg }}"
           echo "커밋 메세지 확인: $COMMIT_MSG"
-        
+
           git config --global user.name "woolnd"
           git config --global user.email "wodnd0418@gmail.com"
 
