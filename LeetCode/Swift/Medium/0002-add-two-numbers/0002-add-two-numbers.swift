@@ -10,27 +10,28 @@
  */
 class Solution {
     func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
-        let dummy = ListNode(0)
-        var curr = dummy
-        var carry = 0
+    let dummy = ListNode(0)
+    var curr = dummy
+    var carry = 0
+    var p = l1, q = l2
 
-        var p = l1
-        var q = l2
-
-        while p != nil || q != nil || carry != 0 {
-            let x = p?.val ?? 0
-            let y = q?.val ?? 0
-
-            let sum = x + y + carry
-            carry = sum / 10
-
-            curr.next = ListNode(sum % 10)
-            curr = curr.next!
-
-            p = p?.next
-            q = q?.next
+    while p != nil || q != nil || carry != 0 {
+        if carry == 0 {
+            if p == nil { curr.next = q; break }
+            if q == nil { curr.next = p; break }
         }
 
-        return dummy.next
+        let x = p?.val ?? 0
+        let y = q?.val ?? 0
+        let sum = x + y + carry
+        
+        carry = sum / 10
+        curr.next = ListNode(sum % 10)
+        curr = curr.next!
+
+        p = p?.next
+        q = q?.next
     }
+    return dummy.next
+}
 }
